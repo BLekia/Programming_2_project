@@ -21,6 +21,7 @@ public class OrganizationManagementSystem {
                     break;
                 case "q":
                     System.out.println("\nQuitting the application.\n");
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("\nInvalid choice. Please try again.\n");
