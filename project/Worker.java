@@ -1,3 +1,5 @@
+package project;
+
 public class Worker extends Organization {
     String name;
     int index = 1;
