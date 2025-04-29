@@ -28,10 +28,6 @@ public class Group extends Organization {
 
     }
 
-    public void remove() {
-
-    }
-
     public void print() {
         Group fillerGroup;
         Worker fillerWorker;
