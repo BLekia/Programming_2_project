@@ -3,13 +3,13 @@ import java.util.List;
 import java.util.Iterator;
 
 public class Group extends Organization {
-    String groupName;
+    String name;
     String bossName;
     int index = 0;
     ArrayList<Organization> content = new ArrayList<Organization>();
 
-    public Group(String groupName, String bossName) {
-        this.groupName = groupName;
+    public Group(String name, String bossName) {
+        this.name = name;
         this.bossName = bossName;
     }
 
@@ -37,7 +37,7 @@ public class Group extends Organization {
         for (int i = 0; i < index; i++) {
             System.out.print("  ");
         }
-        System.out.println("Group: " + groupName + ", boss's name: " + bossName);
+        System.out.println("Group: " + name + ", boss's name: " + bossName);
         {
             for (int i = 0; i < content.size(); i++)
                 if (content.get(i) instanceof Group) {
@@ -52,7 +52,7 @@ public class Group extends Organization {
     }
 
     public Group findGroupByName(Group currentGroup, String name) {
-        if (currentGroup.groupName.equals(name)) {
+        if (currentGroup.name.equals(name)) {
             return currentGroup;
         }
 
