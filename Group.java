@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Iterator;
 
 public class Group extends Organization {
     String groupName;
@@ -64,5 +66,22 @@ public class Group extends Organization {
         }
 
         return null;
+    }
+
+    public static void removeWorkerByName(Group currentGroup, String workerName) {
+        List<Organization> elements = currentGroup.content;
+        Iterator<Organization> iterator = elements.iterator();
+
+        while (iterator.hasNext()) {
+            Object element = iterator.next();
+            if (element instanceof Worker) {
+                Worker person = (Worker) element;
+                if (person.name.equals(workerName)) {
+                    iterator.remove();
+                }
+            } else if (element instanceof Group) {
+                removeWorkerByName((Group) element, workerName);
+            }
+        }
     }
 }

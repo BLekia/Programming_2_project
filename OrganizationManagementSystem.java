@@ -46,27 +46,34 @@ public class OrganizationManagementSystem {
                         org.print();
                         System.out.println();
 
-                        try {
-                            System.out.print("\nGive unit name: ");
-                            input = sc.nextLine().trim();
-                            Group result = org.findGroupByName(org, input);
-                            if (result.groupName.equals(input)) {
-                                try {
-                                    System.out.print("\nGive person name: ");
-                                    input = sc.nextLine().trim();
-                                    result.add(new Worker(input));
-                                } catch (Exception e) {
-                                    System.out.println("Incorrect input.");
-                                }
+                        System.out.print("\nGive unit name: ");
+                        input = sc.nextLine().trim();
+                        Group result = org.findGroupByName(org, input);
+                        if (result.groupName.equals(input)) {
+                            try {
+                                System.out.print("\nGive person name: ");
+                                input = sc.nextLine().trim();
+                                result.add(new Worker(input));
+                            } catch (Exception e) {
+                                System.out.println("Incorrect input.");
                             }
-                        } catch (Exception e) {
+                        } else {
                             System.out.println("No matches found.");
+                            return;
                         }
 
                     }
                     break;
                 case "3":
                     // Print organization, remove person from it and finally print it
+                    org.print();
+                    System.out.println();
+
+                    System.out.print("\nGive person name: ");
+                    input = sc.nextLine().trim();
+
+                    Group.removeWorkerByName(org, input);
+
                     break;
                 case "q":
                     System.out.println("\nQuitting the application.\n");
