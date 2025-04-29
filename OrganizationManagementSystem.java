@@ -49,7 +49,7 @@ public class OrganizationManagementSystem {
                         System.out.print("\nGive unit name: ");
                         input = sc.nextLine().trim();
                         Group result = org.findGroupByName(org, input);
-                        if (result.groupName.equals(input)) {
+                        if (result.name.equals(input)) {
                             try {
                                 System.out.print("\nGive person name: ");
                                 input = sc.nextLine().trim();
