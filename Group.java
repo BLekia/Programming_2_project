@@ -4,7 +4,7 @@ public class Group extends Organization {
     String groupName;
     String bossName;
     int index = 0;
-    ArrayList<Object> content = new ArrayList<Object>();
+    ArrayList<Organization> content = new ArrayList<Organization>();
 
     public Group(String groupName, String bossName) {
         this.groupName = groupName;
@@ -36,16 +36,33 @@ public class Group extends Organization {
             System.out.print("  ");
         }
         System.out.println("Group: " + groupName + ", boss's name: " + bossName);
-        for (int i = 0; i < content.size(); i++) {
-
-            if (content.get(i) instanceof Group) {
-                fillerGroup = (Group) content.get(i);
-                fillerGroup.print();
-            } else {
-                fillerWorker = (Worker) content.get(i);
-                fillerWorker.print();
-            }
+        {
+            for (int i = 0; i < content.size(); i++)
+                if (content.get(i) instanceof Group) {
+                    fillerGroup = (Group) content.get(i);
+                    fillerGroup.print();
+                } else {
+                    fillerWorker = (Worker) content.get(i);
+                    fillerWorker.print();
+                }
 
         }
+    }
+
+    public Group findGroupByName(Group currentGroup, String name) {
+        if (currentGroup.groupName.equals(name)) {
+            return currentGroup;
+        }
+
+        for (int i = 0; i < content.size(); i++) {
+            if (content.get(i) instanceof Group) {
+                Group foundGroup = findGroupByName((Group) content.get(i), name);
+                if (foundGroup != null) {
+                    return foundGroup;
+                }
+            }
+        }
+
+        return null;
     }
 }

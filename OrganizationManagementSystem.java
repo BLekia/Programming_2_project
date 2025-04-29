@@ -12,35 +12,35 @@ public class OrganizationManagementSystem {
             switch (input) {
                 case "1":
                     // Create and print hard coded organization
-                    org = new Group("Top Managment", "John Worker");
-                    Group marketing = new Group("Marketing", "Jack Styles");
-                    Group hr = new Group("Human Resources", "Glenn Chambers");
-                    Group sDev = new Group("Software Development", "Kermit Whodunnit");
+                    if (org == null) {
+                        org = new Group("Top Managment", "John Worker");
+                        Group marketing = new Group("Marketing", "Jack Styles");
+                        Group hr = new Group("Human Resources", "Glenn Chambers");
+                        Group sDev = new Group("Software Development", "Kermit Whodunnit");
 
-                    org.add(new Worker("Hilda Hilda", "Secretary"));
+                        org.add(new Worker("Hilda Hilda", "Secretary"));
 
-                    marketing.add(new Worker("Blake Bad"));
-                    marketing.add(new Worker("Jane Austin"));
-                    marketing.add(new Worker("Hyde Jekyll"));
-                    org.add(marketing);
+                        marketing.add(new Worker("Blake Bad"));
+                        marketing.add(new Worker("Jane Austin"));
+                        marketing.add(new Worker("Hyde Jekyll"));
+                        org.add(marketing);
 
-                    hr.add(new Worker("Mandy Hopkins"));
-                    hr.add(new Worker("May Day"));
-                    hr.add(new Worker("Gary Riggby"));
-                    org.add(hr);
+                        hr.add(new Worker("Mandy Hopkins"));
+                        hr.add(new Worker("May Day"));
+                        hr.add(new Worker("Gary Riggby"));
+                        org.add(hr);
 
-                    sDev.add(new Worker("Sheldon Egg"));
-                    sDev.add(new Worker("Jimmy Neutron"));
-                    sDev.add(new Worker("Michael Lynx"));
-                    org.add(sDev);
+                        sDev.add(new Worker("Sheldon Egg"));
+                        sDev.add(new Worker("Jimmy Neutron"));
+                        sDev.add(new Worker("Michael Lynx"));
+                        org.add(sDev);
+                    }
 
-                    org.print();
-                    System.out.println();
                     break;
                 case "2":
                     // Print organization, add person to it and finally print it
                     if (org == null) {
-                        System.out.println("Organization not yet created. Create it in step 1.");
+                        System.out.println("\nOrganization not yet created. Create it in step 1.\n");
 
                     } else {
                         org.print();
@@ -49,14 +49,18 @@ public class OrganizationManagementSystem {
                         try {
                             System.out.print("\nGive unit name: ");
                             input = sc.nextLine().trim();
+                            Group result = org.findGroupByName(org, input);
+                            if (result.groupName.equals(input)) {
+                                try {
+                                    System.out.print("\nGive person name: ");
+                                    input = sc.nextLine().trim();
+                                    result.add(new Worker(input));
+                                } catch (Exception e) {
+                                    System.out.println("Incorrect input.");
+                                }
+                            }
                         } catch (Exception e) {
                             System.out.println("No matches found.");
-                        }
-                        try {
-                            System.out.print("\nGive person name: ");
-                            input = sc.nextLine().trim();
-                        } catch (Exception e) {
-                            System.out.println("Incorrect input.");
                         }
 
                     }
@@ -71,7 +75,11 @@ public class OrganizationManagementSystem {
                 default:
                     System.out.println("\nInvalid choice. Please try again.\n");
             }
-        } while (!input.equals("q"));
+            org.print();
+            System.out.println();
+        }
+
+        while (!input.equals("q"));
 
         sc.close();
     }
